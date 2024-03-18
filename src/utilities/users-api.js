@@ -11,10 +11,9 @@ export async function signUp(userData) {
     body: JSON.stringify(userData),
   });
 
+  // return token = res.json()
   if (res.ok) {
-    //const token = await res.json();
-    const token = await res.json();
-    return token;
+    return res.json();
   } else {
     throw new Error("Invalid Sign up");
   }
@@ -27,7 +26,7 @@ export async function login(credentials) {
     body: JSON.stringify(credentials),
   });
   if (res.ok) {
-    const token = await res.json();
+    const token = res.json();
     return token;
   } else {
     throw new Error("Fail login");
