@@ -2,5 +2,30 @@ import * as usersAPI from "./users-api";
 
 export async function signUp(userData) {
   const token = await usersAPI.signUp(userData);
+  //save token in localstorage
+  localStorage.setItem("token", token);
   return token;
+}
+
+export function getToken() {
+  //distract token from local storage
+  const token = localStorage.getItem("token");
+
+  if (!token) return null;
+
+  //extract token from payload
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  // if token expire, remove it
+  if (payload.exp < Date.now() / 1000) {
+    localStorage.removeItem("token");
+    return null;
+  }
+
+  return token;
+}
+
+export function getUser() {
+  const token = getToken();
+  //.user refer to users.js payload define -> jwt.sign() key
+  return token ? JSON.parse(token.splict(".")[1].user) : null;
 }
