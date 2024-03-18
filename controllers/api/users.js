@@ -5,8 +5,6 @@ function create(req, res) {
     name: req.body.name,
     email: req.body.email,
   };
-  console.log(userData);
-  // Baby step...
   res.json(userData);
 }
 

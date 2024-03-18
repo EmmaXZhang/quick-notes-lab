@@ -13,7 +13,6 @@ export async function signUp(userData) {
 
   if (res.ok) {
     const userData = await res.json();
-    console.log("userData", userData);
     return userData;
   } else {
     throw new Error("Invalid Sign up");
