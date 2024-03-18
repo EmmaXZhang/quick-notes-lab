@@ -35,14 +35,16 @@ async function login(req, res) {
   try {
     //user we need to query for the user based upon their email
     //and then verify the password is correct using bcrypt’s compare method.
-    const user = await User.findOne(email);
-    if (!user)
+    const user = await User.findOne({ email });
+    if (!user) {
       return res.status(401).json({ error: "Invalid email or password" });
+    }
 
     //compare password to hashed password (user.password)
     const match = await bcrypt.compare(password, user.password);
-    if (!match)
+    if (!match) {
       return res.status(401).json({ error: "invalid email or password" });
+    }
 
     //if match, send back JWT token
     res.json(createJWT(user));

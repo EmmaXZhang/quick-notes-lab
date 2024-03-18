@@ -26,7 +26,7 @@ export default function AuthPage({ setUser }) {
           <SignUpForm setUser={setUser} />
           <p>
             Already have an account{" "}
-            <button onClick={handleSwitchForm}>Swith to SignIn</button>
+            <button onClick={handleSwitchForm}>Switch to SignIn</button>
           </p>
         </>
       )}
