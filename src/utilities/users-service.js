@@ -14,6 +14,12 @@ export function LogOut() {
   localStorage.removeItem("token");
 }
 
+export async function login(credentials) {
+  const token = await usersAPI.login(credentials);
+  localStorage.setItem("token", token);
+  return getUser();
+}
+
 export function getToken() {
   //distract token from local storage
   const token = localStorage.getItem("token");

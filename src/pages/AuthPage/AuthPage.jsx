@@ -15,7 +15,7 @@ export default function AuthPage({ setUser }) {
       <h1>AuthPage</h1>
       {showLogInForm ? (
         <>
-          <LoginForm />
+          <LoginForm setUser={setUser} />
           <p>
             Don&apos;t have account ?
             <button onClick={handleSwitchForm}>Switch to SignUp</button>
