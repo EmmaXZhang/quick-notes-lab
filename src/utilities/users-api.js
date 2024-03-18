@@ -12,8 +12,9 @@ export async function signUp(userData) {
   });
 
   if (res.ok) {
-    const userData = await res.json();
-    return userData;
+    //const token = await res.json();
+    const token = await res.json();
+    return token;
   } else {
     throw new Error("Invalid Sign up");
   }

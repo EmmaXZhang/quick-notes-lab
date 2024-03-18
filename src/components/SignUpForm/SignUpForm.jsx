@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Component } from "react";
 
 import { signUp } from "../../utilities/users-service";
@@ -27,8 +28,10 @@ export default class SignUpForm extends Component {
       delete formData.error;
       delete formData.confirm;
       const user = await signUp(formData);
-      console.log(user);
-    } catch {
+      //set user state
+      this.props.setUser(user);
+    } catch (err) {
+      console.log("sign up failed", err);
       // An error occurred
       this.setState({ error: "Sign Up Failed - Try Again" });
     }

@@ -1,16 +1,22 @@
 import * as usersAPI from "./users-api";
 
 export async function signUp(userData) {
+  //server send back hashed token based on userData
   const token = await usersAPI.signUp(userData);
   //save token in localstorage
   localStorage.setItem("token", token);
-  return token;
+  //get user
+  return getUser();
+}
+
+export function LogOut() {
+  //remove token from local storage
+  localStorage.removeItem("token");
 }
 
 export function getToken() {
   //distract token from local storage
   const token = localStorage.getItem("token");
-
   if (!token) return null;
 
   //extract token from payload
@@ -20,12 +26,11 @@ export function getToken() {
     localStorage.removeItem("token");
     return null;
   }
-
   return token;
 }
 
 export function getUser() {
   const token = getToken();
   //.user refer to users.js payload define -> jwt.sign() key
-  return token ? JSON.parse(token.splict(".")[1].user) : null;
+  return token ? JSON.parse(atob(token.split(".")[1])).user : null;
 }
