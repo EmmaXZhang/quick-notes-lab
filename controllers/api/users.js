@@ -1,10 +1,13 @@
+/* eslint-disable no-undef */
 function create(req, res) {
-  res.json({
-    user: {
-      name: req.body.name,
-      email: req.body.email,
-    },
-  });
+  console.log("req.body", req.body);
+  const userData = {
+    name: req.body.name,
+    email: req.body.email,
+  };
+  console.log(userData);
+  // Baby step...
+  res.json(userData);
 }
 
 module.exports = {

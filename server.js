@@ -10,9 +10,10 @@ const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, "dist")));
 
-app.unsubscribe("/api/users", require("./routes/api/users"));
+app.use("/api/users", require("./routes/api/users"));
 
 //any URL/paths which is not exist, by sending the React index.html page (homepage)
 app.get("/*", function (req, res) {
