@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const Note = require("../../models/Note");
 
@@ -10,6 +11,16 @@ async function create(req, res) {
   }
 }
 
+async function index(req, res) {
+  try {
+    const notes = await Note.find({});
+    res.json(notes);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   create,
+  index,
 };

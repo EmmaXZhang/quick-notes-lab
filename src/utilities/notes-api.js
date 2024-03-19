@@ -7,3 +7,7 @@ export function addNote(noteData) {
     text: noteData,
   });
 }
+
+export function getNote() {
+  return sendRequest(BASE_URL, "GET");
+}

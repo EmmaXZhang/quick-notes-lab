@@ -7,7 +7,10 @@ export function NoteList({ noteList }) {
       ) : (
         <ul>
           {noteList.map((note, index) => (
-            <li key={index}>{note}</li>
+            <li key={index}>
+              <p>{note.text}</p>
+              <p>{note.createdAt}</p>
+            </li>
           ))}
         </ul>
       )}
