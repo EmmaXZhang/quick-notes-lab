@@ -1,35 +1,19 @@
 // BASE URL for backend API (backend route)
+
+import sendRequest from "./send-request";
+
 const BASE_URL = "/api/users";
 
+//return token !
 export async function signUp(userData) {
-  // it uses the fetch function to send a POST request to a specified URL (BASE_URL). The request includes the user data in the request body,
-  //serialized as JSON using JSON.stringify(userData).
-  const res = await fetch(BASE_URL, {
-    //sending data to backend
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(userData),
-  });
-
-  // return token = res.json()
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Invalid Sign up");
-  }
+  return sendRequest(BASE_URL, "POST", userData);
 }
 
+// return token
 export async function login(credentials) {
-  //fetch(BASE_URL+'/login')
-  const res = await fetch(`${BASE_URL}/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials),
-  });
-  if (res.ok) {
-    const token = res.json();
-    return token;
-  } else {
-    throw new Error("Fail login");
-  }
+  return sendRequest(`${BASE_URL}/login`, "POST", credentials);
+}
+
+export function checkToken() {
+  return sendRequest(`$(BASE_URL/check-token)`);
 }

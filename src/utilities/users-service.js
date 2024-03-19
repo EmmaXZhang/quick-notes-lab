@@ -40,3 +40,7 @@ export function getUser() {
   //.user refer to users.js payload define -> jwt.sign() key
   return token ? JSON.parse(atob(token.split(".")[1])).user : null;
 }
+
+export function checkToken() {
+  return usersAPI.checkToken().then((dateStr) => new Date(dateStr));
+}

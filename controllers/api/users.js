@@ -8,9 +8,7 @@ async function create(req, res) {
   try {
     //The create() function is to handle the creation of a new user.
     const user = await User.create(req.body);
-
     const token = createJWT(user);
-
     res.json(token);
   } catch (err) {
     res.status(400).json(err);
@@ -44,7 +42,6 @@ async function login(req, res) {
     if (!match) {
       return res.status(401).json({ error: "invalid email or password" });
     }
-
     //if match, send back JWT token
     res.json(createJWT(user));
   } catch (err) {
