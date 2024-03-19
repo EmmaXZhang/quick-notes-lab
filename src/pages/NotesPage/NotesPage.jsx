@@ -27,6 +27,7 @@ export default function NotesPage() {
     }
   }
 
+  //component is being initialized and inserted into the DOM for the first time.
   useEffect(() => {
     (async () => {
       try {
