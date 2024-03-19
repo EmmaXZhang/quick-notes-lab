@@ -4,7 +4,11 @@ const Note = require("../../models/Note");
 
 async function create(req, res) {
   try {
-    const note = await Note.create(req.body);
+    const note = await Note.create({
+      //specify the property in req.body
+      text: req.body.text,
+      user: req.user._id,
+    });
     res.json(note);
   } catch (err) {
     res.status(400).json(err);

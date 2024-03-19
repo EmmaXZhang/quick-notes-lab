@@ -14,12 +14,10 @@ export default function NotesPage() {
     event.preventDefault();
     try {
       // send newNote to backend to add, then wait note object to created and send back
+      // note is an object, property can be found in <notes> controller
       const note = await createNote(newNote);
 
-      setNoteList([
-        ...noteList,
-        { text: note.text, createdAt: note.createdAt },
-      ]);
+      setNoteList([...noteList, note]);
 
       setNewNote("");
     } catch (err) {
@@ -32,10 +30,8 @@ export default function NotesPage() {
     (async () => {
       try {
         const notes = await getNote();
-        setNoteList([
-          ...noteList,
-          { text: notes.text, createdAt: notes.createdAt },
-        ]);
+        console.log("notes", notes);
+        setNoteList(notes);
       } catch (err) {
         console.log(err);
       }
