@@ -1,37 +1,34 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { createNote } from "../../utilities/notes-servie";
+import NoteForm from "../../components/NoteForm/NoteForm";
 
 export default function NotesPage() {
-  const [newNote, setNewNote] = useState("");
-  const [noteList, setNoteList] = useState([]);
+  const [note, setNote] = useState([]);
 
-  // function addToNoteList(noteToAdd) {
-  //   setNoteList([...noteList, noteToAdd]);
-  // }
-
-  function handleAddNote(event) {
+  async function handleAddNote(event) {
     event.preventDefault();
-    setNoteList([...noteList, newNote]);
-    setNewNote("");
+    try {
+      // send newNote to backend to add to database ?????? need to change format ?
+      const newNote = await createNote(newNote);
+      setNote([...note, newNote]);
+      setNote([]);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
     <>
       <h1>Quck Notes</h1>
-      <form onSubmit={handleAddNote}>
-        <textarea
-          value={newNote}
-          onChange={(event) => setNewNote(event.target.value)}
-        ></textarea>
-        <button type="submit">Add Note</button>
-      </form>
+      <NoteForm handleAddNote={handleAddNote} note={note} setNote={setNote} />
 
       <hr />
-      {noteList.length === 0 ? (
+      {note.length === 0 ? (
         <p>No Notes Yet !</p>
       ) : (
         <ul>
-          {noteList.map((note, index) => (
+          {note.map((note, index) => (
             <li key={index}>{note}</li>
           ))}
         </ul>

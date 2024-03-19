@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, "dist")));
 app.use(require("./config/checkToken"));
 
 app.use("/api/users", require("./routes/api/users"));
+app.use("/api/notes", require("./routes/api/notes"));
 
 //any URL/paths which is not exist, by sending the React index.html page (homepage)
 app.get("/*", function (req, res) {
