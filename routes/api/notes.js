@@ -10,4 +10,6 @@ router.post("/", notesCtrl.create);
 // GET /api/notes
 router.get("/", notesCtrl.index);
 
+router.delete("/:id", notesCtrl.delete);
+
 module.exports = router;

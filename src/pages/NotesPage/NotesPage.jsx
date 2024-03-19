@@ -5,6 +5,7 @@ import { createNote } from "../../utilities/notes-servie";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import { NoteList } from "../../components/NoteForm/NoteList";
 import { getNote } from "../../utilities/notes-api";
+import { deleteNote } from "../../utilities/notes-servie";
 
 export default function NotesPage() {
   const [newNote, setNewNote] = useState("");
@@ -20,6 +21,18 @@ export default function NotesPage() {
       setNoteList([...noteList, note]);
 
       setNewNote("");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleDelete(noteId) {
+    try {
+      await deleteNote(noteId);
+      //filter out deleted note id
+      const updatedNotes = noteList.filter((n) => n._id !== noteId);
+      console.log("updatedNotes", updatedNotes);
+      setNoteList(updatedNotes);
     } catch (err) {
       console.log(err);
     }
@@ -47,7 +60,7 @@ export default function NotesPage() {
         setNewNote={setNewNote}
       />
       <hr />
-      <NoteList noteList={noteList} />
+      <NoteList noteList={noteList} handleDelete={handleDelete} />
     </>
   );
 }

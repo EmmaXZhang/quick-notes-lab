@@ -24,7 +24,17 @@ async function index(req, res) {
   }
 }
 
+async function deleteNote(req, res) {
+  try {
+    await Note.deleteOne({ _id: req.params.id, user: req.user._id });
+    res.json(true);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   create,
   index,
+  delete: deleteNote,
 };

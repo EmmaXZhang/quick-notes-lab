@@ -11,3 +11,7 @@ export function addNote(noteData) {
 export function getNote() {
   return sendRequest(BASE_URL, "GET");
 }
+
+export function deleteNote(id) {
+  return sendRequest(`${BASE_URL}/${id}`, "DELETE");
+}
