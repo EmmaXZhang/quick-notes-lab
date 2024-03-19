@@ -38,12 +38,11 @@ export default function NotesPage() {
     }
   }
 
-  //component is being initialized and inserted into the DOM for the first time.
+  //only one time when page loaded
   useEffect(() => {
     (async () => {
       try {
         const notes = await getNote();
-        console.log("notes", notes);
         setNoteList(notes);
       } catch (err) {
         console.log(err);
