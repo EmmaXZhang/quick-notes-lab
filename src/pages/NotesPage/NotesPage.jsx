@@ -2,17 +2,19 @@
 import { useState } from "react";
 import { createNote } from "../../utilities/notes-servie";
 import NoteForm from "../../components/NoteForm/NoteForm";
+import { NoteList } from "../../components/NoteForm/NoteList";
 
 export default function NotesPage() {
-  const [note, setNote] = useState([]);
+  const [newNote, setNewNote] = useState("");
+  const [noteList, setNoteList] = useState([]);
 
   async function handleAddNote(event) {
     event.preventDefault();
     try {
-      // send newNote to backend to add to database ?????? need to change format ?
-      const newNote = await createNote(newNote);
-      setNote([...note, newNote]);
-      setNote([]);
+      // send newNote to backend to add
+      const note = await createNote(newNote);
+      setNoteList([...noteList, note]);
+      setNewNote("");
     } catch (err) {
       console.log(err);
     }
@@ -21,17 +23,17 @@ export default function NotesPage() {
   return (
     <>
       <h1>Quck Notes</h1>
-      <NoteForm handleAddNote={handleAddNote} note={note} setNote={setNote} />
+      <NoteForm
+        handleAddNote={handleAddNote}
+        newNote={newNote}
+        setNewNote={setNewNote}
+      />
 
       <hr />
-      {note.length === 0 ? (
+      {noteList.length === 0 ? (
         <p>No Notes Yet !</p>
       ) : (
-        <ul>
-          {note.map((note, index) => (
-            <li key={index}>{note}</li>
-          ))}
-        </ul>
+        <NoteList noteList={noteList} />
       )}
     </>
   );

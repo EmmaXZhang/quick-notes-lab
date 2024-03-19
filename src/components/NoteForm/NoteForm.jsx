@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
-export default function NoteForm({ handleAddNote, note, setNote }) {
+export default function NoteForm({ handleAddNote, newNote, setNewNote }) {
   return (
     <form onSubmit={handleAddNote}>
       <textarea
-        value={note}
-        onChange={(event) => setNote(event.target.value)}
+        value={newNote}
+        onChange={(event) => setNewNote(event.target.value)}
       ></textarea>
       <button type="submit">Add Note</button>
     </form>
