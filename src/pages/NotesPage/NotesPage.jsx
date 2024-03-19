@@ -13,7 +13,7 @@ export default function NotesPage() {
     try {
       // send newNote to backend to add
       const note = await createNote(newNote);
-      setNoteList([...noteList, note]);
+      setNoteList([...noteList, note.text]);
       setNewNote("");
     } catch (err) {
       console.log(err);
