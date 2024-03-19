@@ -13,6 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static(path.join(__dirname, "dist")));
 
+app.use(require("./config/checkToken"));
+
 app.use("/api/users", require("./routes/api/users"));
 
 //any URL/paths which is not exist, by sending the React index.html page (homepage)
