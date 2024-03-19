@@ -20,6 +20,7 @@ export async function signUp(userData) {
 }
 
 export async function login(credentials) {
+  //fetch(BASE_URL+'/login')
   const res = await fetch(`${BASE_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
