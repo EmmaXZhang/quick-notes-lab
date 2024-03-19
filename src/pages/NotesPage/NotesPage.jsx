@@ -28,13 +28,8 @@ export default function NotesPage() {
         newNote={newNote}
         setNewNote={setNewNote}
       />
-
       <hr />
-      {noteList.length === 0 ? (
-        <p>No Notes Yet !</p>
-      ) : (
-        <NoteList noteList={noteList} />
-      )}
+      <NoteList noteList={noteList} />
     </>
   );
 }
