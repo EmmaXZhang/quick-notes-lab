@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
-import { createNote } from "../../utilities/notes-servie";
+import { createNote } from "../../utilities/notes-api";
 import NoteForm from "../../components/NoteForm/NoteForm";
 import { NoteList } from "../../components/NoteForm/NoteList";
 import { getNote } from "../../utilities/notes-api";
-import { deleteNote } from "../../utilities/notes-servie";
+import { deleteNote } from "../../utilities/notes-api";
 
 export default function NotesPage() {
   const [newNote, setNewNote] = useState("");
