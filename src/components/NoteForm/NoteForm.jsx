@@ -1,5 +1,17 @@
 /* eslint-disable react/prop-types */
-export default function NoteForm({ handleAddNote, newNote, setNewNote }) {
+import { useState } from "react";
+
+export default function NoteForm({ addNote }) {
+  const [newNote, setNewNote] = useState("");
+
+  function handleAddNote(event) {
+    event.preventDefault();
+
+    addNote(newNote);
+
+    setNewNote("");
+  }
+
   return (
     <form onSubmit={handleAddNote}>
       <textarea

@@ -8,19 +8,14 @@ import { getNote } from "../../utilities/notes-api";
 import { deleteNote } from "../../utilities/notes-api";
 
 export default function NotesPage() {
-  const [newNote, setNewNote] = useState("");
   const [noteList, setNoteList] = useState([]);
 
-  async function handleAddNote(event) {
-    event.preventDefault();
+  async function addNote(note) {
     try {
       // send newNote to backend to add, then wait note object to created and send back
       // note is an object, property can be found in <notes> controller
-      const note = await createNote(newNote);
-
-      setNoteList([...noteList, note]);
-
-      setNewNote("");
+      const newNote = await createNote(note);
+      setNoteList([...noteList, newNote]);
     } catch (err) {
       console.log(err);
     }
@@ -31,7 +26,6 @@ export default function NotesPage() {
       await deleteNote(noteId);
       //filter out deleted note id
       const updatedNotes = noteList.filter((n) => n._id !== noteId);
-      console.log("updatedNotes", updatedNotes);
       setNoteList(updatedNotes);
     } catch (err) {
       console.log(err);
@@ -53,11 +47,7 @@ export default function NotesPage() {
   return (
     <>
       <h1>Quck Notes</h1>
-      <NoteForm
-        handleAddNote={handleAddNote}
-        newNote={newNote}
-        setNewNote={setNewNote}
-      />
+      <NoteForm addNote={addNote} />
       <hr />
       <NoteList noteList={noteList} handleDelete={handleDelete} />
     </>
